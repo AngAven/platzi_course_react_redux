@@ -6,7 +6,7 @@ import * as usuariosActions from '../../actions/usuariosActions'
 
 class Usuarios extends Component {
   componentDidMount(){
-    console.log('Componenete montado => componentDidMount()')
+    console.log(this.props.usuarios.data)
     this.props.traerTodos()
   }
 

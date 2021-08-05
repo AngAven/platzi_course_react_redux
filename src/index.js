@@ -11,7 +11,7 @@ import App from './components/App';
 // import reportWebVitals from './reportWebVitals';
 
 const store = createStore(
-  reducers, //reducers
+  reducers, // reducers
   {}, // estado inicial
   applyMiddleware(reduxThunk)
 )
