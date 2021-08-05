@@ -9,8 +9,10 @@ const Tareas = () => <div>Tareas</div>
 const App = (props) => (
   <BrowserRouter>
     <Menu/>
-    <Route exact path={'/'} component={Usuarios} />
-    <Route exact path={'/tareas'} component={Tareas} />
+    <div className={'margin'}>
+      <Route exact path={'/'} component={Usuarios} />
+      <Route exact path={'/tareas'} component={Tareas} />
+    </div>
   </BrowserRouter>
 )
 
