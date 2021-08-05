@@ -7,6 +7,7 @@ import * as usuariosActions from '../../actions/usuariosActions'
 // Componentes
 import Sppiner from '../general/Sppiner'
 import Fatal from '../general/Fatal'
+import Tabla from './Tabla'
 
 class Usuarios extends Component {
   componentDidMount(){
@@ -20,37 +21,8 @@ class Usuarios extends Component {
     if (this.props.error){
       return <Fatal mensaje={this.props.error}/>
     }
-    return (
-      <table className={"table"}>
-        <thead>
-        <tr>
-          <th>Nombre</th>
-          <th>Email</th>
-          <th>Link</th>
-        </tr>
-        </thead>
-        <tbody>
-        { this.ponerFilas() }
-        </tbody>
-      </table>
-    )
+    return <Tabla usuarios={this.props.usuarios}/>
   }
-
-  ponerFilas = () => (
-    this.props.usuarios.map(usuario => (
-      <tr key={usuario.id}>
-        <td>
-          { usuario.name }
-        </td>
-        <td>
-          { usuario.email }
-        </td>
-        <td>
-          { usuario.website }
-        </td>
-      </tr>
-    ))
-  )
 
   render(){
     return (
