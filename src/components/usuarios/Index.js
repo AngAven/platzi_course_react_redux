@@ -4,10 +4,32 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import * as usuariosActions from '../../actions/usuariosActions'
 
+import Sppiner from '../general/Sppiner'
+
 class Usuarios extends Component {
   componentDidMount(){
     console.log(this.props.usuarios.data)
     this.props.traerTodos()
+  }
+
+  ponerContenido = () => {
+    if (this.props.cargando){
+      return <Sppiner/>
+    }
+    return (
+      <table className={"table"}>
+        <thead>
+        <tr>
+          <th>Nombre</th>
+          <th>Email</th>
+          <th>Link</th>
+        </tr>
+        </thead>
+        <tbody>
+        { this.ponerFilas() }
+        </tbody>
+      </table>
+    )
   }
 
   ponerFilas = () => (
@@ -28,20 +50,9 @@ class Usuarios extends Component {
 
   render(){
     return (
-      <div>
-        <table className={"table"}>
-          <thead>
-          <tr>
-            <th>Nombre</th>
-            <th>Email</th>
-            <th>Link</th>
-          </tr>
-          </thead>
-          <tbody>
-          { this.ponerFilas() }
-          </tbody>
-        </table>
-      </div>
+      <>
+        { this.ponerContenido() }
+      </>
     );
   }
 }
