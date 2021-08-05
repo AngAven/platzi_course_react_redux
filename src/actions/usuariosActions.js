@@ -5,19 +5,19 @@ export const traerTodos = () => async (dispatch) =>{
   dispatch({
     type: CARGANDO
   })
+
   try{
     const usuarios = await axios.get('https://jsonplaceholder.typicode.com/users')
 
     dispatch({
       type: TRAER_TODOS,
-      payload: usuarios.data
+      payload: usuarios.data,
     })
 
   } catch (error) {
     dispatch({
       type: ERROR,
-      cargando: false,
-      payload: error.message,
+      payload: 'Algo salió mal, intente mas tarde',
     })
   }
 }

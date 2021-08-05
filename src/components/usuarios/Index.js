@@ -4,17 +4,21 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import * as usuariosActions from '../../actions/usuariosActions'
 
+// Componentes
 import Sppiner from '../general/Sppiner'
+import Fatal from '../general/Fatal'
 
 class Usuarios extends Component {
   componentDidMount(){
-    console.log(this.props.usuarios.data)
     this.props.traerTodos()
   }
 
   ponerContenido = () => {
     if (this.props.cargando){
       return <Sppiner/>
+    }
+    if (this.props.error){
+      return <Fatal mensaje={this.props.error}/>
     }
     return (
       <table className={"table"}>
