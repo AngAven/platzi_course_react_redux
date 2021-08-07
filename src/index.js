@@ -7,6 +7,7 @@ import reduxThunk from 'redux-thunk'
 import reducers from './reducers/index'
 
 import './css/index.css';
+import './css/iconos.css';
 import App from './components/App';
 // import reportWebVitals from './reportWebVitals';
 
