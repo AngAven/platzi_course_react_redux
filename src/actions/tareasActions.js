@@ -19,8 +19,6 @@ export const traerTodas = () => async (dispatch) =>{
       }
     })
 
-    console.log(tareas)
-
     dispatch({
         type: TRAER_TODAS,
       payload: tareas,
