@@ -111,7 +111,7 @@ class Publicaciones extends Component {
 
   mostrarComentarios = (publicacion_key, comentario_key, comentarios) => {
     this.props.abrirCerrar(publicacion_key, comentario_key)
-    if (!comentarios.lenght){
+    if (!comentarios.length){
       this.props.traerComentarios(publicacion_key, comentario_key)
     }
   }
