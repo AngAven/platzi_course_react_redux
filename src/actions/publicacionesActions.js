@@ -74,3 +74,25 @@ export const abrirCerrar = (publicacion_key, comentario_key) => (dispatch, getSt
     payload: publicaciones_actualizadas
   })
 }
+
+export const traerComentarios = (publicacion_key, comentario_key) => async (dispatch, getState) => {
+  const {publicaciones} = getState().publicacionesReducer
+  const seleccionada = publicaciones[publicacion_key][comentario_key]
+  const respuesta = await axios.get(`https://jsonplaceholder.typicode.com/comments?postId=${seleccionada.id}`)
+  const actualizada = {
+    ...seleccionada,
+    comentarios: respuesta.data
+  }
+  const publicaciones_actualizadas = [...publicaciones]
+
+  publicaciones_actualizadas[publicacion_key] = [
+    ...publicaciones[publicacion_key]
+
+  ]
+  publicaciones_actualizadas[publicacion_key][comentario_key] = actualizada
+
+  dispatch({
+    type: ACTUALIZAR,
+    payload: publicaciones_actualizadas
+  })
+}

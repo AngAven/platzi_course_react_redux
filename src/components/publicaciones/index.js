@@ -9,9 +9,14 @@ import {traerPorUsuario} from '../../actions/publicacionesActions'
 // Components
 import Fatal from '../general/Fatal'
 import Sppiner from '../general/Sppiner'
+import Comentarios from './Comentarios'
 
 const {traerTodos: usuariosTraerTodos} = usuariosActions
-const {traerPorUsuario: publicacionesTraerPorUsuario, abrirCerrar} = publicacionesActions
+const {
+  traerPorUsuario: publicacionesTraerPorUsuario,
+  abrirCerrar,
+  traerComentarios,
+} = publicacionesActions
 
 class Publicaciones extends Component {
 
@@ -88,20 +93,30 @@ class Publicaciones extends Component {
     publicaciones.map((publicacion, comentario_key) => (
       <div
         key={publicacion.id}
-        onClick={() => this.props.abrirCerrar(publicacion_key, comentario_key)}
+        onClick={
+          () => this.mostrarComentarios(publicacion_key, comentario_key, publicacion.comentarios)
+        }
       >
         <h2>{publicacion.title}</h2>
         <p>{publicacion.body}</p>
         {
           (publicacion.abierto)
-            ? 'Abierto'
-            : 'Cerrado'
+            ? <Comentarios/>
+            : ''
         }
       </div>
     ))
   )
 
+  mostrarComentarios = (publicacion_key, comentario_key, comentarios) => {
+    this.props.abrirCerrar(publicacion_key, comentario_key)
+    if (!comentarios.lenght){
+      this.props.traerComentarios(publicacion_key, comentario_key)
+    }
+  }
+
   render(){
+    console.log(this.props)
     return (
       <div>
         { this.ponerUsuario() }
@@ -122,6 +137,7 @@ const mapDispatchToProps = {
   usuariosTraerTodos,
   publicacionesTraerPorUsuario,
   abrirCerrar,
+  traerComentarios,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Publicaciones)
