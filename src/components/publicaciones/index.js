@@ -6,7 +6,7 @@ import * as usuariosActions from '../../actions/usuariosActions'
 import * as publicacionesActions from '../../actions/publicacionesActions'
 import {traerPorUsuario} from '../../actions/publicacionesActions'
 
-import Spinner from '../general/Sppiner'
+// Components
 import Fatal from '../general/Fatal'
 import Sppiner from '../general/Sppiner'
 
@@ -51,11 +51,56 @@ class Publicaciones extends Component {
     return <h1>Publicaciones de {nombre_de_usuario} </h1>
   }
 
+  ponerPublicaciones = () => {
+    const {
+      usuariosReducer,
+      usuariosReducer: {usuarios},
+      publicacionesReducer,
+      publicacionesReducer: {publicaciones},
+      match: { params: { key } },
+    } =  this.props
+
+    if (!usuarios.length){
+      return
+    }
+    if (usuariosReducer.error){
+      return
+    }
+    if (publicacionesReducer.cargando){
+      return <Sppiner/>
+    }
+    if (publicacionesReducer.error){
+      return <Fatal mensaje={publicacionesReducer.error}/>
+    }
+    if (!publicaciones.length){
+      return
+    }
+    if (!('publicaciones_key' in usuarios[key])){
+      return
+    }
+
+    const {publicaciones_key} = usuarios[key]
+
+    return publicaciones[publicaciones_key].map(publicacion => (
+      <div
+        key={publicacion.id}
+        onClick={() => {
+          alert(publicacion.id)
+        }
+        }
+      >
+        <h2>{publicacion.title}</h2>
+        <p>{publicacion.body}</p>
+      </div>
+    ))
+  }
+
   render(){
     console.log(this.props)
     return (
       <div>
         { this.ponerUsuario() }
+        { this.ponerPublicaciones() }
       </div>
     )
   }
