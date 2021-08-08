@@ -8,7 +8,7 @@ export const traerTodos = () => async (dispatch) => {
   })
 
   try{
-    const publicaciones = axios.get('https://jsonplaceholder.typicode.com/posts')
+    const publicaciones = await axios.get('https://jsonplaceholder.typicode.com/posts')
     dispatch({
       type: TRAER_TODOS,
       payload: publicaciones.data
@@ -19,4 +19,20 @@ export const traerTodos = () => async (dispatch) => {
       payload: 'Algo salió mal, intente mas tarde',
     })
   }
+}
+
+export const traerPorUsuario = (key) => async (dispatch, getState) => {
+  const {usuarios} = getState().usuariosReducer
+  const usuario_id = usuarios[key].id
+
+  dispatch({
+    type: CARGANDO
+  })
+
+  const publicaciones = await axios.get(`https://jsonplaceholder.typicode.com/posts?userId=${usuario_id}`)
+
+  dispatch({
+    type: TRAER_TODOS,
+    payload: publicaciones.data
+  })
 }
