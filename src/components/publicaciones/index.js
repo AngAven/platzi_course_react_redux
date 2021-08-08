@@ -11,7 +11,7 @@ import Fatal from '../general/Fatal'
 import Sppiner from '../general/Sppiner'
 
 const {traerTodos: usuariosTraerTodos} = usuariosActions
-const {traerPorUsuario: publicacionesTraerPorUsuario} = publicacionesActions
+const {traerPorUsuario: publicacionesTraerPorUsuario, abrirCerrar} = publicacionesActions
 
 class Publicaciones extends Component {
 
@@ -81,22 +81,27 @@ class Publicaciones extends Component {
 
     const {publicaciones_key} = usuarios[key]
 
-    return publicaciones[publicaciones_key].map(publicacion => (
+    return this.mostrarInfo(publicaciones[publicaciones_key], publicaciones_key)
+  }
+
+  mostrarInfo = (publicaciones, publicacion_key) => (
+    publicaciones.map((publicacion, comentario_key) => (
       <div
         key={publicacion.id}
-        onClick={() => {
-          alert(publicacion.id)
-        }
-        }
+        onClick={() => this.props.abrirCerrar(publicacion_key, comentario_key)}
       >
         <h2>{publicacion.title}</h2>
         <p>{publicacion.body}</p>
+        {
+          (publicacion.abierto)
+            ? 'Abierto'
+            : 'Cerrado'
+        }
       </div>
     ))
-  }
+  )
 
   render(){
-    console.log(this.props)
     return (
       <div>
         { this.ponerUsuario() }
@@ -116,6 +121,7 @@ const mapStateToProps = ({publicacionesReducer, usuariosReducer}) => {
 const mapDispatchToProps = {
   usuariosTraerTodos,
   publicacionesTraerPorUsuario,
+  abrirCerrar,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Publicaciones)

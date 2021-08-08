@@ -1,4 +1,4 @@
-import { TRAER_POR_USUARIO, CARGANDO, ERROR } from '../types/publicacionestypes'
+import { CARGANDO, ERROR, ACTUALIZAR} from '../types/publicacionestypes'
 import axios from 'axios'
 import * as usuariosTypes from '../types/usuariostypes'
 
@@ -15,13 +15,19 @@ export const traerPorUsuario = (key) => async (dispatch, getState) => {
 
   try{
     const publicacionesDelUsuario = await axios.get(`https://jsonplaceholder.typicode.com/posts?userId=${usuario_id}`)
+    const nuevas = publicacionesDelUsuario.data.map(publicacion => ({
+        ...publicacion,
+        comentarios: [],
+        abierto: false
+    }))
+
     const publicaciones_actualizadas = [
       ...publicaciones,
-      publicacionesDelUsuario.data,
+      nuevas,
     ]
 
     dispatch({
-      type: TRAER_POR_USUARIO,
+      type: ACTUALIZAR,
       payload: publicaciones_actualizadas
     })
 
@@ -46,4 +52,25 @@ export const traerPorUsuario = (key) => async (dispatch, getState) => {
     })
   }
 
+}
+
+export const abrirCerrar = (publicacion_key, comentario_key) => (dispatch, getState) => {
+  const {publicaciones} = getState().publicacionesReducer
+  const seleccionada = publicaciones[publicacion_key][comentario_key]
+  const actualizada = {
+    ...seleccionada,
+    abierto: !seleccionada.abierto
+  }
+  const publicaciones_actualizadas = [...publicaciones]
+
+  publicaciones_actualizadas[publicacion_key] = [
+    ...publicaciones[publicacion_key]
+
+  ]
+  publicaciones_actualizadas[publicacion_key][comentario_key] = actualizada
+
+  dispatch({
+    type: ACTUALIZAR,
+    payload: publicaciones_actualizadas
+  })
 }
