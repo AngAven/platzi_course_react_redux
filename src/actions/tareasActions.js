@@ -31,3 +31,17 @@ export const traerTodas = () => async (dispatch) =>{
     })
   }
 }
+
+export const cambioUsuarioID = (usuarioID) => (dispatch) => {
+  dispatch({
+    type: 'cambio_usuario_id',
+    payload: usuarioID
+  })
+}
+
+export const cambioTitulo = (titulo) => (dispatch) => {
+  dispatch({
+    type: 'cambio_titulo',
+    payload: titulo
+  })
+}
