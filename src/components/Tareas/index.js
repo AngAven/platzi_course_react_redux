@@ -5,6 +5,7 @@ import {connect} from 'react-redux'
 import * as tareasActions  from '../../actions/tareasActions'
 import Spinner from '../general/Spinner'
 import Fatal from '../general/Fatal'
+import {Link} from 'react-router-dom'
 
 class Tareas extends Component {
   componentDidMount(){
@@ -46,6 +47,9 @@ class Tareas extends Component {
   render(){
     return (
       <div>
+        <button>
+          <Link to={'/tareas/guardar'}>Agregar</Link>
+        </button>
         { this.mostrarContenido() }
       </div>
     )
