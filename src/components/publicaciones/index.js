@@ -8,7 +8,7 @@ import {traerPorUsuario} from '../../actions/publicacionesActions'
 
 // Components
 import Fatal from '../general/Fatal'
-import Sppiner from '../general/Sppiner'
+import Spinner from '../general/Spinner'
 import Comentarios from './Comentarios'
 
 const {traerTodos: usuariosTraerTodos} = usuariosActions
@@ -48,7 +48,7 @@ class Publicaciones extends Component {
       return <Fatal mensaje={usuariosReducer.error}/>
     }
     if (!usuariosReducer.usuarios.length || usuariosReducer.cargando){
-      return <Sppiner/>
+      return <Spinner/>
     }
 
     const nombre_de_usuario = usuariosReducer.usuarios[key].name
@@ -72,7 +72,7 @@ class Publicaciones extends Component {
       return
     }
     if (publicacionesReducer.cargando){
-      return <Sppiner/>
+      return <Spinner/>
     }
     if (publicacionesReducer.error){
       return <Fatal mensaje={publicacionesReducer.error}/>
@@ -92,6 +92,7 @@ class Publicaciones extends Component {
   mostrarInfo = (publicaciones, publicacion_key) => (
     publicaciones.map((publicacion, comentario_key) => (
       <div
+        className={'pub_titulo'}
         key={publicacion.id}
         onClick={
           () => this.mostrarComentarios(publicacion_key, comentario_key, publicacion.comentarios)
@@ -101,7 +102,7 @@ class Publicaciones extends Component {
         <p>{publicacion.body}</p>
         {
           (publicacion.abierto)
-            ? <Comentarios/>
+            ? <Comentarios comentarios={publicacion.comentarios}/>
             : ''
         }
       </div>

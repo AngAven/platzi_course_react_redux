@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 import * as usuariosActions from '../../actions/usuariosActions'
 
 // Componentes
-import Sppiner from '../general/Sppiner'
+import Spinner from '../general/Spinner'
 import Fatal from '../general/Fatal'
 import Tabla from './Tabla'
 
@@ -18,7 +18,7 @@ class Usuarios extends Component {
 
   ponerContenido = () => {
     if (this.props.cargando){
-      return <Sppiner/>
+      return <Spinner/>
     }
     if (this.props.error){
       return <Fatal mensaje={this.props.error}/>
