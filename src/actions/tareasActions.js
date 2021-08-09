@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { TRAER_TODAS, CARGANDO, ERROR} from '../types/tareasTypes'
+import {TRAER_TODAS, CAMBIO_USUARIO_ID, CARGANDO, ERROR, CAMBIO_TITULO, AGREGADA} from '../types/tareasTypes'
 
 export const traerTodas = () => async (dispatch) =>{
   dispatch({
@@ -34,14 +34,15 @@ export const traerTodas = () => async (dispatch) =>{
 
 export const cambioUsuarioID = (usuarioID) => (dispatch) => {
   dispatch({
-    type: 'cambio_usuario_id',
+    type: CAMBIO_USUARIO_ID,
     payload: usuarioID
   })
 }
 
 export const cambioTitulo = (titulo) => (dispatch) => {
+  console.log(titulo)
   dispatch({
-    type: 'cambio_titulo',
+    type: CAMBIO_TITULO,
     payload: titulo
   })
 }
@@ -55,7 +56,7 @@ export const agregar = tarea => async dispatch => {
     const respuesta = await axios.post('https://jsonplaceholder.typicode.com/todos', tarea)
 
     dispatch({
-      type: 'agregada',
+      type: AGREGADA,
 
     })
   } catch (error) {
