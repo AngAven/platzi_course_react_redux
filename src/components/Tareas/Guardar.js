@@ -10,6 +10,21 @@ import Fatal from '../general/Fatal'
 import Spinner from '../general/Spinner'
 
 class Guardar extends Component {
+  componentDidMount(){
+    const {
+      match: {params: {usuario_id, tareaID}},
+      tareas,
+      cambioTitulo,
+      cambioUsuarioID,
+    } = this.props
+
+    if (usuario_id && tareaID){
+      const tarea = tareas[usuario_id][tareaID]
+      cambioUsuarioID(tarea.userId)
+      cambioTitulo(tarea.title)
+    }
+  }
+
   cambioUsuarioId = e => {
     this.props.cambioUsuarioID(e.target.value)
   }
@@ -19,14 +34,32 @@ class Guardar extends Component {
   }
 
   guardar = () => {
-    const {usuario_id, titulo, agregar} = this.props
+    const {
+      match: {params: {usuario_id, tareaID}},
+      titulo,
+      agregar,
+      editar,
+      tareas,
+    } = this.props
+
     const nuevaTarea = {
       userId: usuario_id,
       title: titulo,
       completed: false,
     }
 
-    agregar(nuevaTarea)
+    if (usuario_id && tareaID){
+      const tarea = tareas[usuario_id][tareaID]
+      const tarea_editada = {
+        ...nuevaTarea,
+        completed: tarea.completed,
+        id: tarea.id
+      }
+      editar(tarea_editada)
+    } else {
+      agregar(nuevaTarea)
+    }
+
   }
 
   deshabilitar = () => {

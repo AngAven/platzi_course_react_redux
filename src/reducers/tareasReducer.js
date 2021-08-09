@@ -1,4 +1,11 @@
-import {TRAER_TODAS, CAMBIO_USUARIO_ID, CARGANDO, ERROR, CAMBIO_TITULO, AGREGADA} from '../types/tareasTypes'
+import {
+  TRAER_TODAS,
+  CAMBIO_USUARIO_ID,
+  CARGANDO,
+  ERROR,
+  CAMBIO_TITULO,
+  GUARDAR,
+} from '../types/tareasTypes'
 
 const INITIAL_STATE = {
   tareas: {},
@@ -40,7 +47,7 @@ export default (state = INITIAL_STATE, action) => {
         ...state,
         titulo: action.payload
       }
-    case AGREGADA:
+    case GUARDAR:
       return {
         ...state,
         tareas: {},

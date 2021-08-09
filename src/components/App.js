@@ -6,6 +6,7 @@ import Usuarios from './usuarios/Index'
 import Publicaciones from './publicaciones'
 import Tareas from './Tareas'
 import TareasGuardar from './Tareas/Guardar'
+import Guardar from './Tareas/Guardar'
 
 const App = (props) => (
   <BrowserRouter>
@@ -14,6 +15,7 @@ const App = (props) => (
       <Route exact path={'/'} component={Usuarios} />
       <Route exact path={'/tareas'} component={Tareas} />
       <Route exact path={'/tareas/guardar'} component={TareasGuardar} />
+      <Route exact path={'/tareas/guardar/:usuario_id/:tareaID'} component={Guardar} />
       <Route exact path={'/publicaciones/:key'} component={Publicaciones} />
     </div>
   </BrowserRouter>
