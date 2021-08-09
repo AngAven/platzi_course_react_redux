@@ -4,7 +4,7 @@ import {
   CAMBIO_USUARIO_ID,
   CARGANDO, ERROR,
   CAMBIO_TITULO,
-  AGREGADA,
+  ACTUALIZAR,
   GUARDAR,
 } from '../types/tareasTypes'
 
@@ -96,4 +96,25 @@ export const editar = tarea_editada => async dispatch => {
       payload: 'Intente mas tarde'
     })
   }
+}
+
+export const cambioCheck = (usuario_id,tareaID) => (dispatch, getState) => {
+  const {tareas} = getState().tareasReducer
+  const seleccionada = tareas[usuario_id][tareaID]
+  const actualizadas = {
+    ...tareas
+  }
+
+  actualizadas[usuario_id] = {
+    ...tareas[usuario_id]
+  }
+  actualizadas[usuario_id][tareaID] = {
+    ...tareas[usuario_id][tareaID],
+    completed: !seleccionada.completed,
+  }
+
+  dispatch({
+    type: ACTUALIZAR,
+    payload: actualizadas,
+  })
 }

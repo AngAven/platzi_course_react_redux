@@ -5,6 +5,7 @@ import {
   ERROR,
   CAMBIO_TITULO,
   GUARDAR,
+  ACTUALIZAR,
 } from '../types/tareasTypes'
 
 const INITIAL_STATE = {
@@ -56,6 +57,11 @@ export default (state = INITIAL_STATE, action) => {
         error: null,
         usuario_id: '',
         titulo: '',
+      }
+    case ACTUALIZAR:
+      return {
+        ...state,
+        tareas: action.payload,
       }
     default:
       return state
