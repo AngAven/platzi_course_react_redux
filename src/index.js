@@ -17,7 +17,9 @@ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
 const store = createStore(
   reducers, // reducers
   {}, // estado inicial
-  compose(applyMiddleware(reduxThunk), composeEnhancers()),
+  compose(
+    applyMiddleware(reduxThunk), // funciones async
+    composeEnhancers()), // devtools
 )
 
 
