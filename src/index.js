@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 //Redux
-import {createStore, applyMiddleware} from 'redux'
+import {createStore, applyMiddleware, compose} from 'redux'
 import {Provider} from 'react-redux'
 import reduxThunk from 'redux-thunk'
 import reducers from './reducers/index'
@@ -11,10 +11,13 @@ import './css/iconos.css';
 import App from './components/App';
 // import reportWebVitals from './reportWebVitals';
 
+// Ver Redux en web dev tools
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
+
 const store = createStore(
   reducers, // reducers
   {}, // estado inicial
-  applyMiddleware(reduxThunk)
+  compose(applyMiddleware(reduxThunk), composeEnhancers()),
 )
 
 
