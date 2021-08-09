@@ -16,12 +16,15 @@ class Guardar extends Component {
       tareas,
       cambioTitulo,
       cambioUsuarioID,
+      limpiarForma,
     } = this.props
 
     if (usuario_id && tareaID){
       const tarea = tareas[usuario_id][tareaID]
       cambioUsuarioID(tarea.userId)
       cambioTitulo(tarea.title)
+    } else {
+      limpiarForma()
     }
   }
 
