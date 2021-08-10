@@ -7,4 +7,4 @@ services:
 networks:
   default:
     external: true
-    name: local
+    name: apps
