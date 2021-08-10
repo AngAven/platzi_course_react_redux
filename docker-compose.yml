@@ -2,7 +2,7 @@ version: "3.9"
 
 services:
   app:
-    container_name: app_blog
+    container_name: app.blog
     build: .
 networks:
   default:
