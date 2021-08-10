@@ -12,7 +12,7 @@ import App from './components/App';
 // import reportWebVitals from './reportWebVitals';
 
 // Ver Redux en web dev tools
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 
 const store = createStore(
   reducers, // reducers
