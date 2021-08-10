@@ -134,7 +134,6 @@ export const eliminar = tareaID => async dispatch => {
   }
 }
 
-
 export const limpiarForma = () => dispatch => {
   dispatch({
     type: LIMPIAR,
